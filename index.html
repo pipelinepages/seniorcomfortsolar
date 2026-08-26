@@ -1,0 +1,1462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Senior Comfort Solar System — reliable, quiet, automatic home power designed for elderly parents and peace of mind for their families." />
+    <title>Reliable Power for Your Parents</title>
+
+    <!-- Favicon & Apple Touch -->
+    <link rel="icon" href="todahslogo.png" type="image/png" />
+    <link rel="apple-touch-icon" href="todahslogo.png" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #050505;
+            --bg-2: #0a0a0a;
+            --card: #101010;
+            --card-2: #141414;
+            --ink: #f7f7f2;
+            --muted: #a7a7a1;
+            --yellow: #ffd21c;
+            --yellow-2: #ffe36a;
+            --line: rgba(255, 255, 255, .09);
+            --line-strong: rgba(255, 210, 28, .28);
+            --soft: #171717;
+            --warning: #19170c;
+            --shadow: 0 30px 90px rgba(0, 0, 0, .45);
+            --shadow-yellow: 0 18px 60px rgba(255, 210, 28, .16);
+            --radius: 28px;
+            --radius-sm: 18px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0
+        }
+        html {
+            scroll-behavior: smooth;
+            background: var(--bg)
+        }
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background:
+                radial-gradient(circle at 12% 4%, rgba(255, 210, 28, .10), transparent 28rem),
+                radial-gradient(circle at 92% 28%, rgba(255, 210, 28, .06), transparent 24rem),
+                var(--bg);
+            color: var(--ink);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            text-rendering: optimizeLegibility;
+            overflow-x: hidden;
+        }
+        body:before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: -1;
+            opacity: .36;
+            background-image: linear-gradient(rgba(255, 255, 255, .018) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, .018) 1px, transparent 1px);
+            background-size: 56px 56px;
+            mask-image: linear-gradient(to bottom, black, transparent 88%);
+        }
+        a {
+            text-decoration: none;
+            color: inherit
+        }
+        button,
+        input,
+        select,
+        textarea {
+            font: inherit
+        }
+        .container {
+            width: min(1180px, calc(100% - 40px));
+            margin: auto
+        }
+
+        .topbar {
+            background: var(--yellow);
+            color: #090909;
+            text-align: center;
+            padding: 10px 16px;
+            font-size: 13px;
+            font-weight: 800;
+            letter-spacing: .01em;
+        }
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            padding: 14px 0;
+            background: linear-gradient(to bottom, rgba(5, 5, 5, .92), rgba(5, 5, 5, .58), transparent);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+        }
+        .nav-inner {
+            min-height: 66px;
+            padding: 0 10px 0 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 18px;
+            background: rgba(18, 18, 18, .76);
+            border: 1px solid var(--line);
+            border-radius: 22px;
+            box-shadow: 0 14px 48px rgba(0, 0, 0, .22);
+        }
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+            font-family: 'Manrope', sans-serif;
+            font-weight: 800;
+            letter-spacing: -.02em;
+        }
+        .brand-mark {
+            width: 38px;
+            height: 38px;
+            border-radius: 12px;
+            display: block;
+            object-fit: contain;
+            box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .22), 0 8px 24px rgba(255, 210, 28, .18);
+            background: transparent;
+            flex-shrink: 0;
+        }
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 26px;
+            font-size: 14px;
+            color: #c6c6c0
+        }
+        .nav-links>a:not(.nav-cta) {
+            transition: color .22s ease
+        }
+        .nav-links>a:not(.nav-cta):hover {
+            color: #fff
+        }
+        .nav-cta {
+            padding: 11px 17px;
+            border-radius: 14px;
+            background: var(--yellow);
+            color: #090909;
+            font-weight: 800;
+            box-shadow: 0 10px 30px rgba(255, 210, 28, .12);
+            transition: transform .22s ease, box-shadow .22s ease
+        }
+        .nav-cta:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 14px 34px rgba(255, 210, 28, .18)
+        }
+
+        .hero {
+            padding: 86px 0 68px;
+            position: relative
+        }
+        .hero:before {
+            content: "";
+            position: absolute;
+            width: 560px;
+            height: 560px;
+            border-radius: 50%;
+            right: -260px;
+            top: -80px;
+            background: radial-gradient(circle, rgba(255, 210, 28, .14), rgba(255, 210, 28, 0) 68%);
+            filter: blur(8px);
+            pointer-events: none
+        }
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.08fr .92fr;
+            gap: 62px;
+            align-items: center
+        }
+        .eyebrow {
+            display: inline-flex;
+            gap: 8px;
+            align-items: center;
+            padding: 8px 12px;
+            border: 1px solid var(--line-strong);
+            background: rgba(255, 210, 28, .07);
+            border-radius: 999px;
+            color: var(--yellow-2);
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: .03em;
+            margin-bottom: 22px
+        }
+        h1,
+        h2,
+        h3 {
+            font-family: 'Manrope', sans-serif;
+            letter-spacing: -.045em
+        }
+        h1 {
+            font-size: clamp(46px, 6.2vw, 78px);
+            line-height: .98;
+            margin-bottom: 24px;
+            max-width: 900px;
+            font-weight: 800;
+            background: linear-gradient(180deg, #fff 0%, #f0f0e8 68%, #a9a99f 130%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent
+        }
+        .hero-copy {
+            font-size: 19px;
+            color: #aaa9a2;
+            max-width: 720px;
+            margin-bottom: 30px;
+            line-height: 1.72
+        }
+        .hero-copy strong {
+            color: #fff;
+            font-weight: 700
+        }
+        .hero-actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 30px
+        }
+        .btn {
+            min-height: 52px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 9px;
+            padding: 14px 20px;
+            border-radius: 15px;
+            font-weight: 800;
+            transition: transform .22s ease, box-shadow .22s ease, background .22s ease, border-color .22s ease;
+            border: 1px solid transparent;
+            cursor: pointer
+        }
+        .btn-primary {
+            background: var(--yellow);
+            color: #090909;
+            box-shadow: 0 12px 36px rgba(255, 210, 28, .15)
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 18px 46px rgba(255, 210, 28, .24);
+            background: #ffdc42
+        }
+        .btn-secondary {
+            border-color: var(--line);
+            background: rgba(255, 255, 255, .045);
+            color: #f7f7f2;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, .04)
+        }
+        .btn-secondary:hover {
+            transform: translateY(-2px);
+            background: rgba(255, 255, 255, .075);
+            border-color: rgba(255, 255, 255, .16)
+        }
+        .microproof {
+            display: flex;
+            gap: 18px;
+            flex-wrap: wrap;
+            color: #8e8e87;
+            font-size: 13px
+        }
+        .microproof span {
+            display: flex;
+            align-items: center;
+            gap: 8px
+        }
+        .dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--yellow);
+            box-shadow: 0 0 14px rgba(255, 210, 28, .6)
+        }
+
+        .hero-card {
+            background: linear-gradient(145deg, rgba(22, 22, 22, .98), rgba(9, 9, 9, .98));
+            color: #fff;
+            border-radius: 30px;
+            padding: 30px;
+            border: 1px solid rgba(255, 255, 255, .10);
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+            isolation: isolate
+        }
+        .hero-card:before {
+            content: "";
+            position: absolute;
+            width: 320px;
+            height: 320px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 210, 28, .24), rgba(255, 210, 28, 0) 68%);
+            right: -145px;
+            top: -135px;
+            z-index: -1
+        }
+        .hero-card:after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(120deg, rgba(255, 255, 255, .04), transparent 30%);
+            pointer-events: none;
+            z-index: -1
+        }
+        .hero-card .label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: .16em;
+            color: #92928b;
+            margin-bottom: 10px;
+            font-weight: 800
+        }
+        .hero-card h3 {
+            font-size: 30px;
+            line-height: 1.16;
+            margin-bottom: 18px;
+            letter-spacing: -.04em
+        }
+        .system-flow {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin: 24px 0
+        }
+        .flow-step {
+            background: rgba(255, 255, 255, .045);
+            border: 1px solid var(--line);
+            padding: 16px 10px;
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, .03)
+        }
+        .flow-icon {
+            font-size: 24px;
+            margin-bottom: 7px;
+            filter: saturate(.85)
+        }
+        .flow-step b {
+            display: block;
+            font-size: 13px;
+            color: #fff
+        }
+        .flow-step small {
+            color: #898982;
+            font-size: 11px
+        }
+        .hero-note {
+            padding: 16px;
+            border-radius: 15px;
+            background: var(--yellow);
+            color: #0b0b0a;
+            font-size: 13px;
+            font-weight: 800;
+            box-shadow: 0 16px 40px rgba(255, 210, 28, .13)
+        }
+
+        .trust-strip {
+            padding: 10px 0 70px
+        }
+        .trust-inner {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px
+        }
+        .trust-item {
+            background: linear-gradient(180deg, rgba(255, 255, 255, .055), rgba(255, 255, 255, .025));
+            border: 1px solid var(--line);
+            border-radius: 18px;
+            padding: 18px;
+            font-weight: 800;
+            font-size: 14px;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, .025)
+        }
+        .trust-item small {
+            display: block;
+            color: #7f7f79;
+            font-weight: 500;
+            margin-top: 4px;
+            line-height: 1.5
+        }
+
+        section {
+            padding: 96px 0;
+            position: relative
+        }
+        .section-head {
+            max-width: 780px;
+            margin-bottom: 42px
+        }
+        .section-kicker {
+            color: var(--yellow);
+            font-weight: 800;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: .15em;
+            margin-bottom: 13px
+        }
+        h2 {
+            font-size: clamp(36px, 4.8vw, 56px);
+            line-height: 1.04;
+            margin-bottom: 16px;
+            font-weight: 800
+        }
+        .section-head p {
+            font-size: 18px;
+            color: #96968f;
+            line-height: 1.7
+        }
+
+        .problem {
+            background: #090909;
+            color: #fff;
+            border-top: 1px solid var(--line);
+            border-bottom: 1px solid var(--line)
+        }
+        .problem:before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 10% 20%, rgba(255, 210, 28, .08), transparent 28rem);
+            pointer-events: none
+        }
+        .problem .section-head p {
+            color: #92928b
+        }
+        .problem-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px
+        }
+        .problem-card {
+            padding: 28px;
+            border: 1px solid var(--line);
+            border-radius: 22px;
+            background: linear-gradient(180deg, rgba(255, 255, 255, .05), rgba(255, 255, 255, .024));
+            transition: transform .25s ease, border-color .25s ease, background .25s ease
+        }
+        .problem-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(255, 210, 28, .22);
+            background: linear-gradient(180deg, rgba(255, 210, 28, .055), rgba(255, 255, 255, .026))
+        }
+        .problem-card .num {
+            font-family: 'Manrope';
+            font-size: 13px;
+            font-weight: 800;
+            color: #0a0a0a;
+            background: var(--yellow);
+            display: inline-grid;
+            place-items: center;
+            min-width: 34px;
+            height: 27px;
+            padding: 0 8px;
+            border-radius: 999px;
+            margin-bottom: 26px
+        }
+        .problem-card h3 {
+            font-size: 21px;
+            margin-bottom: 9px
+        }
+        .problem-card p {
+            color: #8f8f88;
+            font-size: 15px
+        }
+
+        .outcomes-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 14px
+        }
+        .outcome {
+            display: flex;
+            gap: 16px;
+            padding: 24px;
+            border-radius: 20px;
+            background: linear-gradient(180deg, rgba(255, 255, 255, .05), rgba(255, 255, 255, .025));
+            border: 1px solid var(--line);
+            transition: transform .25s ease, border-color .25s ease
+        }
+        .outcome:hover {
+            transform: translateY(-3px);
+            border-color: rgba(255, 255, 255, .14)
+        }
+        .outcome-icon {
+            width: 46px;
+            height: 46px;
+            flex: 0 0 46px;
+            border-radius: 14px;
+            background: #1d1a0c;
+            border: 1px solid rgba(255, 210, 28, .18);
+            display: grid;
+            place-items: center;
+            font-size: 21px
+        }
+        .outcome h3 {
+            font-size: 18px;
+            margin-bottom: 4px;
+            letter-spacing: -.025em
+        }
+        .outcome p {
+            color: #85857f;
+            font-size: 15px
+        }
+
+        .how {
+            background: #0a0a0a;
+            border-top: 1px solid var(--line);
+            border-bottom: 1px solid var(--line)
+        }
+        .how-grid {
+            display: grid;
+            grid-template-columns: .9fr 1.1fr;
+            gap: 18px;
+            align-items: stretch
+        }
+        .how-visual {
+            background: linear-gradient(150deg, #20200b, #111005 62%, #0d0d0d);
+            border: 1px solid rgba(255, 210, 28, .18);
+            border-radius: 28px;
+            color: #fff;
+            padding: 34px;
+            min-height: 460px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: var(--shadow-yellow);
+            position: relative;
+            overflow: hidden
+        }
+        .how-visual:after {
+            content: "";
+            position: absolute;
+            width: 330px;
+            height: 330px;
+            border-radius: 50%;
+            right: -150px;
+            bottom: -170px;
+            background: rgba(255, 210, 28, .11);
+            filter: blur(4px)
+        }
+        .how-visual .big {
+            font-family: 'Manrope';
+            font-size: clamp(48px, 6vw, 70px);
+            font-weight: 800;
+            line-height: .95;
+            color: var(--yellow);
+            letter-spacing: -.06em
+        }
+        .how-visual p {
+            color: #bab9ad;
+            position: relative;
+            z-index: 1;
+            max-width: 92%
+        }
+        .steps {
+            display: grid;
+            gap: 12px
+        }
+        .step {
+            background: linear-gradient(180deg, rgba(255, 255, 255, .05), rgba(255, 255, 255, .025));
+            border: 1px solid var(--line);
+            border-radius: 18px;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: 42px 1fr;
+            gap: 14px;
+            align-items: start
+        }
+        .step-num {
+            width: 42px;
+            height: 42px;
+            border-radius: 13px;
+            background: var(--yellow);
+            color: #0b0b0a;
+            display: grid;
+            place-items: center;
+            font-weight: 900;
+            box-shadow: 0 10px 26px rgba(255, 210, 28, .12)
+        }
+        .step h3 {
+            font-size: 18px;
+            margin-bottom: 3px
+        }
+        .step p {
+            color: #85857f;
+            font-size: 15px
+        }
+
+        .included-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px
+        }
+        .included-card {
+            padding: 24px;
+            border-radius: 20px;
+            background: linear-gradient(180deg, rgba(255, 255, 255, .05), rgba(255, 255, 255, .025));
+            border: 1px solid var(--line);
+            min-height: 180px;
+            transition: transform .25s ease, border-color .25s ease
+        }
+        .included-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(255, 210, 28, .18)
+        }
+        .included-card>div:first-child {
+            font-size: 24px
+        }
+        .included-card h3 {
+            font-size: 18px;
+            margin: 14px 0 7px
+        }
+        .included-card p {
+            color: #85857f;
+            font-size: 14px
+        }
+
+        .packages {
+            background: #080808;
+            color: #fff;
+            border-top: 1px solid var(--line);
+            border-bottom: 1px solid var(--line)
+        }
+        .packages:before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 70% 20%, rgba(255, 210, 28, .07), transparent 28rem);
+            pointer-events: none
+        }
+        .packages .section-head p {
+            color: #92928b
+        }
+        .package-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+            align-items: stretch
+        }
+        .package {
+            background: linear-gradient(180deg, #151515, #0d0d0d);
+            color: var(--ink);
+            border-radius: 24px;
+            padding: 26px;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid var(--line);
+            box-shadow: 0 24px 70px rgba(0, 0, 0, .24);
+            transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease
+        }
+        .package:hover {
+            transform: translateY(-4px);
+            border-color: rgba(255, 255, 255, .14)
+        }
+        .package.featured {
+            border-color: rgba(255, 210, 28, .62);
+            transform: translateY(-8px);
+            box-shadow: 0 28px 80px rgba(0, 0, 0, .36), 0 0 0 1px rgba(255, 210, 28, .08), 0 20px 60px rgba(255, 210, 28, .08)
+        }
+        .package.featured:hover {
+            transform: translateY(-11px)
+        }
+        .popular {
+            display: inline-block;
+            align-self: flex-start;
+            background: var(--yellow);
+            color: #090909;
+            padding: 6px 10px;
+            border-radius: 999px;
+            font-size: 10px;
+            font-weight: 900;
+            letter-spacing: .04em;
+            margin-bottom: 14px
+        }
+        .package h3 {
+            font-size: 24px
+        }
+        .price {
+            font-family: 'Manrope';
+            font-size: 36px;
+            font-weight: 800;
+            margin: 8px 0 15px;
+            letter-spacing: -.055em;
+            color: #fff
+        }
+        .price small {
+            display: block;
+            font-family: 'DM Sans';
+            font-size: 11px;
+            color: #74746e;
+            font-weight: 600;
+            margin-top: 5px;
+            letter-spacing: .01em
+        }
+        .spec {
+            font-size: 14px;
+            color: #a3a39d;
+            padding: 13px 0;
+            border-top: 1px solid var(--line);
+            border-bottom: 1px solid var(--line)
+        }
+        .spec strong {
+            color: #fff
+        }
+        .package ul {
+            list-style: none;
+            display: grid;
+            gap: 9px;
+            margin: 18px 0 25px
+        }
+        .package li {
+            font-size: 14px;
+            display: flex;
+            gap: 9px;
+            color: #acaca6
+        }
+        .package li:before {
+            content: '✓';
+            font-weight: 900;
+            color: var(--yellow)
+        }
+        .package .btn {
+            margin-top: auto
+        }
+        .price-note {
+            margin-top: 22px;
+            color: #777771;
+            font-size: 13px;
+            text-align: center
+        }
+
+        .appliances {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            align-items: start
+        }
+        .appliance-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px
+        }
+        .appliance {
+            background: linear-gradient(180deg, rgba(255, 255, 255, .05), rgba(255, 255, 255, .025));
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            padding: 14px 16px;
+            font-weight: 700;
+            font-size: 14px;
+            color: #d8d8d2
+        }
+        .load-note {
+            background: linear-gradient(145deg, #1c1908, #100f09);
+            padding: 26px;
+            border-radius: 22px;
+            border: 1px solid rgba(255, 210, 28, .20);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, .18)
+        }
+        .load-note h3 {
+            font-size: 20px;
+            margin-bottom: 8px;
+            color: var(--yellow-2)
+        }
+        .load-note p {
+            font-size: 14px;
+            color: #aaa797
+        }
+
+        .family {
+            background: linear-gradient(180deg, #090909, #0d0d0a);
+            border-top: 1px solid var(--line);
+            border-bottom: 1px solid var(--line);
+            overflow: hidden
+        }
+        .family:after {
+            content: "";
+            position: absolute;
+            width: 520px;
+            height: 520px;
+            border-radius: 50%;
+            left: -320px;
+            bottom: -280px;
+            background: rgba(255, 210, 28, .07);
+            filter: blur(8px)
+        }
+        .family-card {
+            display: grid;
+            grid-template-columns: 1.05fr .95fr;
+            gap: 30px;
+            align-items: center;
+            position: relative;
+            z-index: 1
+        }
+        .family-copy p {
+            font-size: 18px;
+            color: #94948d;
+            margin-bottom: 22px
+        }
+        .family-points {
+            display: grid;
+            gap: 10px
+        }
+        .family-points div {
+            background: rgba(255, 255, 255, .045);
+            border: 1px solid var(--line);
+            padding: 13px 15px;
+            border-radius: 14px;
+            font-weight: 700;
+            color: #d5d5ce
+        }
+        .quote-card {
+            background: linear-gradient(145deg, #ffd21c, #e7b900);
+            color: #0a0a09;
+            border-radius: 26px;
+            padding: 32px;
+            box-shadow: 0 28px 70px rgba(255, 210, 28, .14);
+            transform: rotate(-1deg)
+        }
+        .quote-card .quote {
+            font-family: 'Manrope';
+            font-size: 28px;
+            font-weight: 800;
+            line-height: 1.24;
+            margin-bottom: 14px;
+            letter-spacing: -.045em
+        }
+        .quote-card p {
+            color: #3d3508;
+            font-weight: 600
+        }
+
+        .faq-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px
+        }
+        details {
+            background: linear-gradient(180deg, rgba(255, 255, 255, .05), rgba(255, 255, 255, .025));
+            border: 1px solid var(--line);
+            border-radius: 17px;
+            padding: 19px 20px;
+            transition: border-color .22s ease, background .22s ease
+        }
+        details[open] {
+            border-color: rgba(255, 210, 28, .22);
+            background: rgba(255, 210, 28, .035)
+        }
+        summary {
+            cursor: pointer;
+            font-weight: 800;
+            list-style: none;
+            padding-right: 26px;
+            position: relative;
+            color: #e9e9e3
+        }
+        summary::-webkit-details-marker {
+            display: none
+        }
+        summary:after {
+            content: '+';
+            position: absolute;
+            right: 0;
+            top: -2px;
+            color: var(--yellow);
+            font-size: 22px;
+            font-weight: 500;
+            transition: transform .2s ease
+        }
+        details[open] summary:after {
+            transform: rotate(45deg)
+        }
+        details p {
+            color: #85857f;
+            font-size: 14px;
+            margin-top: 11px;
+            padding-right: 12px
+        }
+
+        .cta-section {
+            padding: 104px 0
+        }
+        .cta-box {
+            background: linear-gradient(135deg, #191706, #0c0c0a 58%, #111111);
+            border: 1px solid rgba(255, 210, 28, .22);
+            border-radius: 32px;
+            padding: 52px;
+            color: #fff;
+            display: grid;
+            grid-template-columns: 1.1fr .9fr;
+            gap: 34px;
+            align-items: center;
+            box-shadow: 0 34px 100px rgba(0, 0, 0, .36), 0 0 80px rgba(255, 210, 28, .04);
+            position: relative;
+            overflow: hidden
+        }
+        .cta-box:before {
+            content: "";
+            position: absolute;
+            width: 440px;
+            height: 440px;
+            border-radius: 50%;
+            left: -220px;
+            top: -220px;
+            background: rgba(255, 210, 28, .10);
+            filter: blur(4px);
+            pointer-events: none
+        }
+        .cta-box>div,
+        .cta-form {
+            position: relative;
+            z-index: 1
+        }
+        .cta-box h2 {
+            margin-bottom: 13px
+        }
+        .cta-box p {
+            color: #aaa99d;
+            font-size: 17px;
+            line-height: 1.7
+        }
+        .cta-form {
+            background: rgba(255, 255, 255, .97);
+            border: 1px solid rgba(255, 255, 255, .74);
+            border-radius: 22px;
+            padding: 22px;
+            color: #10100f;
+            display: grid;
+            gap: 12px;
+            box-shadow: 0 24px 70px rgba(0, 0, 0, .28)
+        }
+        .cta-form label {
+            font-size: 11px;
+            font-weight: 900;
+            color: #55554f;
+            letter-spacing: .03em
+        }
+        .cta-form input,
+        .cta-form select,
+        .cta-form textarea {
+            width: 100%;
+            border: 1px solid #deded8;
+            background: #f8f8f4;
+            padding: 13px 14px;
+            border-radius: 11px;
+            color: #111;
+            outline: none;
+            transition: border-color .18s ease, box-shadow .18s ease, background .18s ease
+        }
+        .cta-form input:focus,
+        .cta-form select:focus,
+        .cta-form textarea:focus {
+            border-color: #d6ae00;
+            background: #fff;
+            box-shadow: 0 0 0 4px rgba(255, 210, 28, .13)
+        }
+        .cta-form textarea {
+            min-height: 88px;
+            resize: vertical
+        }
+        .cta-form .btn-primary {
+            width: 100%
+        }
+        .form-note {
+            font-size: 11px;
+            color: #787872;
+            text-align: center
+        }
+
+        footer {
+            border-top: 1px solid var(--line);
+            padding: 30px 0 46px;
+            color: #676761;
+            font-size: 13px;
+            background: #050505
+        }
+        .footer-inner {
+            display: flex;
+            justify-content: space-between;
+            gap: 18px;
+            flex-wrap: wrap
+        }
+
+        /* subtle Framer-style entrance motion */
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(16px)
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0)
+            }
+        }
+        .hero-grid>*,
+        .trust-item {
+            animation: fadeUp .7s cubic-bezier(.2, .7, .2, 1) both
+        }
+        .hero-grid>*:nth-child(2) {
+            animation-delay: .08s
+        }
+        .trust-item:nth-child(2) {
+            animation-delay: .04s
+        }
+        .trust-item:nth-child(3) {
+            animation-delay: .08s
+        }
+        .trust-item:nth-child(4) {
+            animation-delay: .12s
+        }
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                scroll-behavior: auto !important;
+                animation: none !important;
+                transition: none !important
+            }
+        }
+
+        @media(max-width:900px) {
+            .nav-links {
+                display: none
+            }
+            .hero-grid,
+            .how-grid,
+            .family-card,
+            .cta-box,
+            .appliances {
+                grid-template-columns: 1fr
+            }
+            .hero-grid {
+                gap: 34px
+            }
+            .trust-inner,
+            .problem-grid,
+            .package-grid,
+            .included-grid {
+                grid-template-columns: repeat(2, 1fr)
+            }
+            .package.featured,
+            .package.featured:hover {
+                transform: none
+            }
+            .how-visual {
+                min-height: 360px
+            }
+            .quote-card {
+                transform: none
+            }
+        }
+        @media(max-width:640px) {
+            .container {
+                width: min(100% - 28px, 1180px)
+            }
+            nav {
+                padding: 10px 0
+            }
+            .nav-inner {
+                min-height: 58px;
+                border-radius: 18px;
+                padding-left: 12px
+            }
+            .brand-mark {
+                width: 34px;
+                height: 34px;
+                border-radius: 11px;
+            }
+            .hero {
+                padding: 52px 0 46px
+            }
+            h1 {
+                font-size: 44px
+            }
+            section {
+                padding: 74px 0
+            }
+            .trust-strip {
+                padding-bottom: 54px
+            }
+            .trust-inner,
+            .problem-grid,
+            .package-grid,
+            .included-grid,
+            .outcomes-grid,
+            .faq-grid {
+                grid-template-columns: 1fr
+            }
+            .system-flow {
+                grid-template-columns: 1fr
+            }
+            .appliance-list {
+                grid-template-columns: 1fr
+            }
+            .cta-box {
+                padding: 26px 20px;
+                border-radius: 24px
+            }
+            .hero-card {
+                padding: 22px;
+                border-radius: 24px
+            }
+            .hero-card h3 {
+                font-size: 26px
+            }
+            .brand span:last-child {
+                font-size: 14px
+            }
+            .section-head {
+                margin-bottom: 32px
+            }
+            .microproof {
+                gap: 10px 16px
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="topbar">Designed for comfort, dignity and peace of mind.</div>
+
+    <nav>
+        <div class="container nav-inner">
+            <a href="#top" class="brand" aria-label="Senior Comfort Solar System home">
+                <img src="todahslogo.png" alt="Todah's Logo" class="brand-mark" />
+                <span>Senior Comfort Solar</span>
+            </a>
+            <div class="nav-links">
+                <a href="#benefits">Benefits</a>
+                <a href="#packages">Packages</a>
+                <a href="#faq">FAQ</a>
+                <a class="nav-cta" href="#assessment">Request Assessment</a>
+            </div>
+        </div>
+    </nav>
+
+    <main id="top">
+        <section class="hero">
+            <div class="container hero-grid">
+                <div>
+                    <div class="eyebrow">For parents, grandparents & the families who care for them</div>
+                    <h1>Give your parents reliable power without generator stress.</h1>
+                    <p class="hero-copy">
+                        A quiet, automatic solar system designed so an elderly parent can keep the <strong>lights, fridge, water pump, fans, TV, Wi‑Fi and security</strong> running—without starting a generator, buying fuel or managing complicated changeovers.
+                    </p>
+                    <div class="hero-actions">
+                        <a class="btn btn-primary" href="#assessment">Get a Home Power Assessment →</a>
+                        <a class="btn btn-secondary" href="#packages">See Senior Packages</a>
+                    </div>
+                    <div class="microproof">
+                        <span><i class="dot"></i> Automatic changeover</span>
+                        <span><i class="dot"></i> Lithium battery storage</span>
+                        <span><i class="dot"></i> Professional installation</span>
+                        <span><i class="dot"></i> Remote monitoring where supported</span>
+                    </div>
+                </div>
+
+                <aside class="hero-card">
+                    <div>
+                        <div class="label">What you are really buying</div>
+                        <h3>Peace of mind that their home still works when the grid doesn't.</h3>
+                        <div class="system-flow">
+                            <div class="flow-step"><div class="flow-icon">☀️</div><b>Solar</b><small>Powers home by day</small></div>
+                            <div class="flow-step"><div class="flow-icon">🔋</div><b>Battery</b><small>Takes over automatically</small></div>
+                            <div class="flow-step"><div class="flow-icon">⚡</div><b>Grid</b><small>Remains backup</small></div>
+                        </div>
+                    </div>
+                    <div class="hero-note">The goal: normal operation should be simple enough that the senior occupant does not need to manage the system.</div>
+                </aside>
+            </div>
+        </section>
+
+        <div class="trust-strip">
+            <div class="container trust-inner">
+                <div class="trust-item">Quiet home power<small>No generator noise, fumes or vibration.</small></div>
+                <div class="trust-item">No fuel stress<small>No petrol or diesel purchasing, storage or refuelling.</small></div>
+                <div class="trust-item">Automatic operation<small>Solar, battery and grid switch automatically.</small></div>
+                <div class="trust-item">Senior-friendly support<small>Remote monitoring and a dedicated after-sale engineer.</small></div>
+            </div>
+        </div>
+
+        <section class="problem">
+            <div class="container">
+                <div class="section-head">
+                    <div class="section-kicker">The real problem</div>
+                    <h2>Your parents should not have to fight for basic power.</h2>
+                    <p>For an elderly person, a blackout is more than an inconvenience. It can mean darkness, heat, spoiled food, no water pumping, dead phones and a generator they may have to start or refuel manually.</p>
+                </div>
+                <div class="problem-grid">
+                    <div class="problem-card"><div class="num">01</div><h3>Remove the physical effort</h3><p>No repeated generator starting, refuelling or frequent manual changeover.</p></div>
+                    <div class="problem-card"><div class="num">02</div><h3>Protect daily comfort</h3><p>Keep essential lighting, refrigeration, fans, communication and water access available.</p></div>
+                    <div class="problem-card"><div class="num">03</div><h3>Give family visibility</h3><p>Remote system monitoring can help you know how the system is performing where supported.</p></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="benefits">
+            <div class="container">
+                <div class="section-head">
+                    <div class="section-kicker">The dream outcome</div>
+                    <h2>A home that quietly takes care of the power problem for them.</h2>
+                    <p>The system is designed around comfort, safety and independence—not around making an elderly person become a solar technician.</p>
+                </div>
+                <div class="outcomes-grid">
+                    <div class="outcome"><div class="outcome-icon">💡</div><div><h3>Safe lighting during outages</h3><p>Essential lights remain available at night and when grid power fails.</p></div></div>
+                    <div class="outcome"><div class="outcome-icon">🧊</div><div><h3>Reliable refrigeration</h3><p>The refrigerator can remain powered during grid interruptions.</p></div></div>
+                    <div class="outcome"><div class="outcome-icon">🚰</div><div><h3>Water when needed</h3><p>The pumping system can operate from the solar system within the designed load.</p></div></div>
+                    <div class="outcome"><div class="outcome-icon">📱</div><div><h3>Phones and Wi‑Fi stay on</h3><p>Communication remains available for family contact and emergencies.</p></div></div>
+                    <div class="outcome"><div class="outcome-icon">🛡️</div><div><h3>Security can stay active</h3><p>CCTV and security lighting can continue working through outages.</p></div></div>
+                    <div class="outcome"><div class="outcome-icon">🔇</div><div><h3>Peace and quiet</h3><p>Reduce generator noise, fumes, vibration and the hassle of fuel handling.</p></div></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="how">
+            <div class="container how-grid">
+                <div class="how-visual">
+                    <div>
+                        <div class="section-kicker" style="color:#ffd21c">Designed to disappear into daily life</div>
+                        <div class="big">Automatic.</div>
+                    </div>
+                    <p>Solar powers the home and charges the battery during the day. When solar production is not enough, the battery supplies the home automatically. The grid remains available as an additional backup.</p>
+                </div>
+                <div class="steps">
+                    <div class="step"><div class="step-num">1</div><div><h3>Home load assessment</h3><p>The final system is selected after checking the home's actual appliances and energy needs.</p></div></div>
+                    <div class="step"><div class="step-num">2</div><div><h3>Senior-friendly system design</h3><p>Hybrid inverter, lithium battery, panels, automatic changeover, protection and monitoring are sized around realistic use.</p></div></div>
+                    <div class="step"><div class="step-num">3</div><div><h3>Professional installation</h3><p>Correct cable sizing, earthing, over-current protection, surge protection, battery isolation and manufacturer-compliant settings.</p></div></div>
+                    <div class="step"><div class="step-num">4</div><div><h3>Support after installation</h3><p>Remote monitoring where equipment supports it, plus a dedicated after-sale engineer.</p></div></div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="container">
+                <div class="section-head">
+                    <div class="section-kicker">What is included</div>
+                    <h2>More than panels and a battery.</h2>
+                    <p>The offer is built around removing the common failure points that create stress for elderly occupants.</p>
+                </div>
+                <div class="included-grid">
+                    <div class="included-card"><div>🔁</div><h3>Automatic Transfer Switch</h3><p>Automatic switching between available power sources so the occupant does not have to manage changeover manually.</p></div>
+                    <div class="included-card"><div>🚨</div><h3>Emergency / motion lighting</h3><p>Additional lighting support intended to improve nighttime convenience and safety.</p></div>
+                    <div class="included-card"><div>⚡</div><h3>Electrical protection</h3><p>Surge protection, lightning protection, breakers, correct earthing and battery isolation.</p></div>
+                    <div class="included-card"><div>📡</div><h3>Remote monitoring</h3><p>Inverter and battery monitoring where the selected equipment supports it.</p></div>
+                    <div class="included-card"><div>🧑‍🔧</div><h3>Dedicated after-sale engineer</h3><p>A clear support path after installation rather than leaving the household to troubleshoot alone.</p></div>
+                    <div class="included-card"><div>💡</div><h3>Energy-efficient LED lighting</h3><p>LED lighting throughout the home is included as part of the senior-friendly extras.</p></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="packages" id="packages">
+            <div class="container">
+                <div class="section-head">
+                    <div class="section-kicker" style="color:#ffd21c">Senior-only package pricing</div>
+                    <h2>Choose the level of comfort their home needs.</h2>
+                    <p>Final equipment selection follows a site load audit. Air conditioners, electric cooking, water heating and other heavy loads may require a larger system.</p>
+                </div>
+
+                <div class="package-grid">
+                    <div class="package">
+                        <h3>Comfort 3</h3>
+                        <div class="price">₦2,685,000<small>Senior package investment</small></div>
+                        <div class="spec"><strong>2.5kW</strong> hybrid inverter · <strong>5kWh</strong> lithium battery · <strong>1.5kW</strong> solar panels</div>
+                        <ul>
+                            <li>Up to 10 LED lights</li>
+                            <li>Refrigerator, TV, washing machine</li>
+                            <li>Fans, Wi‑Fi and CCTV</li>
+                            <li>0.5HP water pump</li>
+                            <li>Automatic changeover</li>
+                            <li>Protection, monitoring and installation</li>
+                        </ul>
+                        <a href="#assessment" class="btn btn-secondary">Request Assessment</a>
+                    </div>
+
+                    <div class="package featured">
+                        <span class="popular">MOST COMFORTABLE FIT</span>
+                        <h3>Comfort 2</h3>
+                        <div class="price">₦2,995,000<small>Senior package investment</small></div>
+                        <div class="spec"><strong>6kW</strong> hybrid inverter · <strong>5kWh</strong> lithium battery · <strong>2.5kW</strong> solar panels</div>
+                        <ul>
+                            <li>Up to 10 LED lights</li>
+                            <li>Refrigerator, TV, washing machine</li>
+                            <li>Water pump, fans, Wi‑Fi and CCTV</li>
+                            <li>Automatic changeover</li>
+                            <li>Protection and monitoring</li>
+                            <li>Professional installation</li>
+                        </ul>
+                        <a href="#assessment" class="btn btn-primary">Assess This Package</a>
+                    </div>
+
+                    <div class="package">
+                        <h3>Comfort 1</h3>
+                        <div class="price">₦3,990,000<small>Senior package investment</small></div>
+                        <div class="spec"><strong>6kW</strong> hybrid inverter · <strong>10kWh</strong> lithium battery · <strong>3kW</strong> solar panels</div>
+                        <ul>
+                            <li>Up to 20 LED lights</li>
+                            <li>Refrigerator, TV, washing machine</li>
+                            <li>Water pump, fans, Wi‑Fi and CCTV</li>
+                            <li>Automatic changeover</li>
+                            <li>Protection and monitoring</li>
+                            <li>Professional installation</li>
+                        </ul>
+                        <a href="#assessment" class="btn btn-secondary">Request Assessment</a>
+                    </div>
+                </div>
+                <p class="price-note">The proposal states that these prices apply when the users are seniors; regular pricing applies if the users are not seniors.</p>
+            </div>
+        </section>
+
+        <section>
+            <div class="container appliances">
+                <div>
+                    <div class="section-head" style="margin-bottom:22px">
+                        <div class="section-kicker">Typical essential loads</div>
+                        <h2>Built around the things that make home feel normal.</h2>
+                    </div>
+                    <div class="appliance-list">
+                        <div class="appliance">LED lights</div>
+                        <div class="appliance">Refrigerator</div>
+                        <div class="appliance">LED / Smart TV</div>
+                        <div class="appliance">Washing machine</div>
+                        <div class="appliance">Water pump</div>
+                        <div class="appliance">Fans</div>
+                        <div class="appliance">Wi‑Fi router</div>
+                        <div class="appliance">Decoder</div>
+                        <div class="appliance">CCTV / security</div>
+                        <div class="appliance">Phone charging</div>
+                    </div>
+                </div>
+                <div class="load-note">
+                    <h3>Important: not every heavy appliance should run at once.</h3>
+                    <p>The system is designed around realistic simultaneous use. High-power appliances such as a washing machine, water pump, electric kettle and microwave should not all be assumed to operate at the same time. Homes with multiple air conditioners, electric cooking, water heating or heavier loads may need a 7.5–10kW inverter, approximately 15–20kWh of lithium storage and a larger solar array.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="family">
+            <div class="container family-card">
+                <div class="family-copy">
+                    <div class="section-kicker">For sons & daughters</div>
+                    <h2>You may not be there every time the power goes out. The system can be.</h2>
+                    <p>If you are the person your parents call when there is no light, no water or the generator refuses to start, this is a way to remove the problem instead of repeatedly solving the emergency.</p>
+                    <div class="family-points">
+                        <div>✓ Less dependence on generators and fuel</div>
+                        <div>✓ Less manual work for elderly occupants</div>
+                        <div>✓ Essential home functions stay available</div>
+                        <div>✓ Support and monitoring can reduce guesswork</div>
+                    </div>
+                </div>
+                <div class="quote-card">
+                    <div class="quote">"I want to know my parents are comfortable even when I'm not there."</div>
+                    <p>That is the offer: not simply solar hardware, but a quieter, safer and more independent home power experience.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="faq">
+            <div class="container">
+                <div class="section-head">
+                    <div class="section-kicker">Frequently asked questions</div>
+                    <h2>Before you choose a package.</h2>
+                </div>
+                <div class="faq-grid">
+                    <details><summary>Will my parent need to switch anything manually?</summary><p>The proposal includes automatic solar/battery/grid changeover. The design objective is to keep normal operation simple enough that the senior occupant does not need to manage the system.</p></details>
+                    <details><summary>Can it power air conditioners?</summary><p>The standard listed packages are built around the stated essential loads. Homes with air conditioners or other heavy loads should be assessed for an upgraded system.</p></details>
+                    <details><summary>Can family members monitor the system remotely?</summary><p>Remote inverter and battery monitoring is included where the selected equipment supports it.</p></details>
+                    <details><summary>What happens when there is little solar energy?</summary><p>The battery can supply the home automatically when solar production is insufficient, while the grid remains available as an additional backup source.</p></details>
+                    <details><summary>Is the electrical installation protected?</summary><p>The proposal specifies proper cable sizing, earthing, over-current protection, surge protection, battery isolation and manufacturer-compliant settings.</p></details>
+                    <details><summary>How do I know which package is right?</summary><p>A site load audit should be completed before final equipment selection so the system reflects the home's real appliance use.</p></details>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-section" id="assessment">
+            <div class="container">
+                <div class="cta-box">
+                    <div>
+                        <div class="section-kicker" style="color:#ffd21c">Start with the home, not a guess</div>
+                        <h2>Request a Senior Home Power Assessment.</h2>
+                        <p>Tell us what your parent uses at home. The next step is to match the right inverter, battery and solar capacity to their real daily needs.</p>
+                    </div>
+                    <form class="cta-form" id="assessmentForm">
+                        <div>
+                            <label for="name">YOUR NAME</label>
+                            <input id="name" name="name" placeholder="e.g. Chinedu Okafor" required />
+                        </div>
+                        <div>
+                            <label for="relation">WHO IS THE SYSTEM FOR?</label>
+                            <select id="relation" name="relation" required>
+                                <option value="">Select one</option>
+                                <option>My mother</option>
+                                <option>My father</option>
+                                <option>Both parents</option>
+                                <option>Grandparent / elderly relative</option>
+                                <option>Myself</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="phone">PHONE / WHATSAPP</label>
+                            <input id="phone" name="phone" type="tel" placeholder="080..." required />
+                        </div>
+                        <div>
+                            <label for="needs">WHAT NEEDS TO STAY POWERED?</label>
+                            <textarea id="needs" name="needs" placeholder="Fridge, lights, TV, water pump, fans, Wi‑Fi, CCTV..."></textarea>
+                        </div>
+                        <button class="btn btn-primary" type="submit">Send via WhatsApp →</button>
+                        <div class="form-note">Your assessment request will be sent directly to our team on WhatsApp.</div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container footer-inner">
+            <div>© 2026 Senior Comfort Solar System Powered by Todah's Solar Energy. All Rights Reserved</div>
+            <div>Reliable • Quiet • Automatic • Senior-Friendly Home Power</div>
+        </div>
+    </footer>
+
+    <script>
+        (function() {
+            const form = document.getElementById('assessmentForm');
+            const phoneNumber = '2349065209762'; // WhatsApp number without +
+
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                // Get form fields
+                const name = document.getElementById('name').value.trim();
+                const relation = document.getElementById('relation').value;
+                const phone = document.getElementById('phone').value.trim();
+                const needs = document.getElementById('needs').value.trim();
+
+                // Basic validation (browser handles required, but double-check)
+                if (!name || !relation || !phone) {
+                    alert('Please fill in all required fields before sending.');
+                    return;
+                }
+
+                // Build the WhatsApp message
+                const message =
+                    `Senior Comfort Solar Assessment Request%0A%0A` +
+                    `Name: ${encodeURIComponent(name)}%0A` +
+                    `System for: ${encodeURIComponent(relation)}%0A` +
+                    `Phone: ${encodeURIComponent(phone)}%0A` +
+                    `Needs: ${encodeURIComponent(needs || 'Not specified')}%0A%0A` +
+                    `Please contact me regarding the senior solar system.`;
+
+                // Build WhatsApp URL
+                const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`;
+
+                // Open WhatsApp in a new tab/window
+                window.open(whatsappUrl, '_blank');
+            });
+        })();
+    </script>
+</body>
+</html>
