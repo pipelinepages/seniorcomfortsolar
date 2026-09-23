@@ -1415,6 +1415,17 @@
                             </select>
                         </div>
                         <div>
+                            <label for="power">CURRENT POWER SITUATION</label>
+                            <select id="power" name="power" required>
+                                <option value="">Select one</option>
+                                <option>Frequent outages (daily or almost daily)</option>
+                                <option>Regular outages (several times a week)</option>
+                                <option>Occasional outages</option>
+                                <option>Mostly rely on generator</option>
+                                <option>Grid is mostly stable</option>
+                            </select>
+                        </div>
+                        <div>
                             <label for="phone">PHONE / WHATSAPP</label>
                             <input id="phone" name="phone" type="tel" placeholder="080..." autocomplete="tel" required />
                         </div>
@@ -1450,11 +1461,12 @@
                 const relation = document.getElementById('relation').value;
                 const location = document.getElementById('location').value.trim();
                 const homeType = document.getElementById('homeType').value;
+                const power = document.getElementById('power').value;
                 const phone = document.getElementById('phone').value.trim();
                 const needs = document.getElementById('needs').value.trim();
 
                 // Basic validation (browser handles required, but double-check)
-                if (!name || !relation || !location || !homeType || !phone) {
+                if (!name || !relation || !location || !homeType || !power || !phone) {
                     alert('Please fill in all required fields before sending.');
                     return;
                 }
@@ -1466,6 +1478,7 @@
                     `System for: ${relation}\n` +
                     `Home location: ${location}\n` +
                     `Home type: ${homeType}\n` +
+                    `Current power situation: ${power}\n` +
                     `Phone: ${phone}\n` +
                     `Needs: ${needs || 'Not specified'}\n\n` +
                     `Please contact me regarding the senior solar system.`;
