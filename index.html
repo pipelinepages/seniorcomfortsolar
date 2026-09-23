@@ -1385,7 +1385,7 @@
                     <form class="cta-form" id="assessmentForm">
                         <div>
                             <label for="name">YOUR NAME</label>
-                            <input id="name" name="name" placeholder="e.g. Chinedu Okafor" required />
+                            <input id="name" name="name" placeholder="e.g. Chinedu Okafor" autocomplete="name" required />
                         </div>
                         <div>
                             <label for="relation">WHO IS THE SYSTEM FOR?</label>
@@ -1399,8 +1399,12 @@
                             </select>
                         </div>
                         <div>
+                            <label for="location">WHERE IS THE HOME?</label>
+                            <input id="location" name="location" placeholder="e.g. Ikeja, Lagos" autocomplete="address-level2" required />
+                        </div>
+                        <div>
                             <label for="phone">PHONE / WHATSAPP</label>
-                            <input id="phone" name="phone" type="tel" placeholder="080..." required />
+                            <input id="phone" name="phone" type="tel" placeholder="080..." autocomplete="tel" required />
                         </div>
                         <div>
                             <label for="needs">WHAT NEEDS TO STAY POWERED?</label>
@@ -1432,26 +1436,28 @@
                 // Get form fields
                 const name = document.getElementById('name').value.trim();
                 const relation = document.getElementById('relation').value;
+                const location = document.getElementById('location').value.trim();
                 const phone = document.getElementById('phone').value.trim();
                 const needs = document.getElementById('needs').value.trim();
 
                 // Basic validation (browser handles required, but double-check)
-                if (!name || !relation || !phone) {
+                if (!name || !relation || !location || !phone) {
                     alert('Please fill in all required fields before sending.');
                     return;
                 }
 
-                // Build the WhatsApp message
+                // Build the WhatsApp message (real line breaks, encoded once at the end)
                 const message =
-                    `Senior Comfort Solar Assessment Request%0A%0A` +
-                    `Name: ${encodeURIComponent(name)}%0A` +
-                    `System for: ${encodeURIComponent(relation)}%0A` +
-                    `Phone: ${encodeURIComponent(phone)}%0A` +
-                    `Needs: ${encodeURIComponent(needs || 'Not specified')}%0A%0A` +
+                    `Senior Comfort Solar Assessment Request\n\n` +
+                    `Name: ${name}\n` +
+                    `System for: ${relation}\n` +
+                    `Home location: ${location}\n` +
+                    `Phone: ${phone}\n` +
+                    `Needs: ${needs || 'Not specified'}\n\n` +
                     `Please contact me regarding the senior solar system.`;
 
                 // Build WhatsApp URL
-                const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`;
+                const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
 
                 // Open WhatsApp in a new tab/window
                 window.open(whatsappUrl, '_blank');
