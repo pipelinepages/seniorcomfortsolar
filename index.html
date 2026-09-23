@@ -1403,6 +1403,18 @@
                             <input id="location" name="location" placeholder="e.g. Ikeja, Lagos" autocomplete="address-level2" required />
                         </div>
                         <div>
+                            <label for="homeType">WHAT TYPE OF HOME IS IT?</label>
+                            <select id="homeType" name="homeType" required>
+                                <option value="">Select one</option>
+                                <option>Bungalow</option>
+                                <option>Duplex</option>
+                                <option>Flat / Apartment</option>
+                                <option>Storey building</option>
+                                <option>Self-contained / Studio</option>
+                                <option>Other / not sure</option>
+                            </select>
+                        </div>
+                        <div>
                             <label for="phone">PHONE / WHATSAPP</label>
                             <input id="phone" name="phone" type="tel" placeholder="080..." autocomplete="tel" required />
                         </div>
@@ -1437,11 +1449,12 @@
                 const name = document.getElementById('name').value.trim();
                 const relation = document.getElementById('relation').value;
                 const location = document.getElementById('location').value.trim();
+                const homeType = document.getElementById('homeType').value;
                 const phone = document.getElementById('phone').value.trim();
                 const needs = document.getElementById('needs').value.trim();
 
                 // Basic validation (browser handles required, but double-check)
-                if (!name || !relation || !location || !phone) {
+                if (!name || !relation || !location || !homeType || !phone) {
                     alert('Please fill in all required fields before sending.');
                     return;
                 }
@@ -1452,6 +1465,7 @@
                     `Name: ${name}\n` +
                     `System for: ${relation}\n` +
                     `Home location: ${location}\n` +
+                    `Home type: ${homeType}\n` +
                     `Phone: ${phone}\n` +
                     `Needs: ${needs || 'Not specified'}\n\n` +
                     `Please contact me regarding the senior solar system.`;
