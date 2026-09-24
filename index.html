@@ -1447,6 +1447,17 @@
                             </select>
                         </div>
                         <div>
+                            <label for="package">PACKAGE INTEREST</label>
+                            <select id="package" name="package" required>
+                                <option value="">Select one</option>
+                                <option>Comfort 3 (₦2,685,000)</option>
+                                <option>Comfort 2 (₦2,995,000) — Most comfortable fit</option>
+                                <option>Comfort 1 (₦3,990,000)</option>
+                                <option>Not sure yet — need guidance</option>
+                                <option>Larger / custom system (AC, heavier loads)</option>
+                            </select>
+                        </div>
+                        <div>
                             <label for="phone">PHONE / WHATSAPP</label>
                             <input id="phone" name="phone" type="tel" placeholder="080..." autocomplete="tel" required />
                         </div>
@@ -1485,11 +1496,12 @@
                 const power = document.getElementById('power').value;
                 const timeline = document.getElementById('timeline').value;
                 const heavy = document.getElementById('heavy').value;
+                const packageInterest = document.getElementById('package').value;
                 const phone = document.getElementById('phone').value.trim();
                 const needs = document.getElementById('needs').value.trim();
 
                 // Basic validation (browser handles required, but double-check)
-                if (!name || !relation || !location || !homeType || !power || !timeline || !heavy || !phone) {
+                if (!name || !relation || !location || !homeType || !power || !timeline || !heavy || !packageInterest || !phone) {
                     alert('Please fill in all required fields before sending.');
                     return;
                 }
@@ -1504,6 +1516,7 @@
                     `Current power situation: ${power}\n` +
                     `How soon it is needed: ${timeline}\n` +
                     `Heavy appliances in use: ${heavy}\n` +
+                    `Package interest: ${packageInterest}\n` +
                     `Phone: ${phone}\n` +
                     `Needs: ${needs || 'Not specified'}\n\n` +
                     `Please contact me regarding the senior solar system.`;
