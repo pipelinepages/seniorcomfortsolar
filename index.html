@@ -973,6 +973,26 @@
             text-align: center
         }
 
+        /* inline field error */
+        .field-error {
+            display: none;
+            font-size: 11px;
+            font-weight: 700;
+            color: #c0392b;
+            margin-top: 6px;
+            letter-spacing: .01em;
+        }
+        .field-error.show {
+            display: block;
+        }
+        .cta-form select.invalid,
+        .cta-form input.invalid,
+        .cta-form textarea.invalid {
+            border-color: #c0392b;
+            background: #fdf2f1;
+            box-shadow: 0 0 0 4px rgba(192, 57, 43, .08);
+        }
+
         footer {
             border-top: 1px solid var(--line);
             padding: 30px 0 46px;
@@ -1382,7 +1402,7 @@
                         <h2>Request a Senior Home Power Assessment.</h2>
                         <p>Tell us what your parent uses at home. The next step is to match the right inverter, battery and solar capacity to their real daily needs.</p>
                     </div>
-                    <form class="cta-form" id="assessmentForm">
+                    <form class="cta-form" id="assessmentForm" novalidate>
                         <div>
                             <label for="name">YOUR NAME</label>
                             <input id="name" name="name" placeholder="e.g. Chinedu Okafor" autocomplete="name" required />
@@ -1458,6 +1478,17 @@
                             </select>
                         </div>
                         <div>
+                            <label for="budget">BUDGET READINESS *</label>
+                            <select id="budget" name="budget" required>
+                                <option value="">Select one</option>
+                                <option>Ready to proceed now</option>
+                                <option>Ready after site assessment</option>
+                                <option>Need a payment plan</option>
+                                <option>Still comparing options</option>
+                            </select>
+                            <div class="field-error" data-error-for="budget"></div>
+                        </div>
+                        <div>
                             <label for="phone">PHONE / WHATSAPP</label>
                             <input id="phone" name="phone" type="tel" placeholder="080..." autocomplete="tel" required />
                         </div>
@@ -1485,24 +1516,89 @@
             const form = document.getElementById('assessmentForm');
             const phoneNumber = '2349065209762'; // WhatsApp number without +
 
+            // Helper: show/clear inline error for a specific field
+            function setFieldError(fieldEl, message) {
+                const wrapper = fieldEl.closest('div');
+                const errorEl = wrapper ? wrapper.querySelector('.field-error') : null;
+                if (message) {
+                    fieldEl.classList.add('invalid');
+                    if (errorEl) {
+                        errorEl.textContent = message;
+                        errorEl.classList.add('show');
+                    }
+                } else {
+                    fieldEl.classList.remove('invalid');
+                    if (errorEl) {
+                        errorEl.textContent = '';
+                        errorEl.classList.remove('show');
+                    }
+                }
+            }
+
+            // Clear errors as user corrects the field
+            form.addEventListener('change', function(e) {
+                if (e.target.matches('select, input, textarea')) {
+                    if (e.target.value.trim()) {
+                        setFieldError(e.target, '');
+                    }
+                }
+            });
+            form.addEventListener('input', function(e) {
+                if (e.target.matches('input, textarea')) {
+                    if (e.target.value.trim()) {
+                        setFieldError(e.target, '');
+                    }
+                }
+            });
+
             form.addEventListener('submit', function(e) {
                 e.preventDefault();
 
                 // Get form fields
-                const name = document.getElementById('name').value.trim();
-                const relation = document.getElementById('relation').value;
-                const location = document.getElementById('location').value.trim();
-                const homeType = document.getElementById('homeType').value;
-                const power = document.getElementById('power').value;
-                const timeline = document.getElementById('timeline').value;
-                const heavy = document.getElementById('heavy').value;
-                const packageInterest = document.getElementById('package').value;
-                const phone = document.getElementById('phone').value.trim();
-                const needs = document.getElementById('needs').value.trim();
+                const nameEl = document.getElementById('name');
+                const relationEl = document.getElementById('relation');
+                const locationEl = document.getElementById('location');
+                const homeTypeEl = document.getElementById('homeType');
+                const powerEl = document.getElementById('power');
+                const timelineEl = document.getElementById('timeline');
+                const heavyEl = document.getElementById('heavy');
+                const packageEl = document.getElementById('package');
+                const budgetEl = document.getElementById('budget');
+                const phoneEl = document.getElementById('phone');
+                const needsEl = document.getElementById('needs');
 
-                // Basic validation (browser handles required, but double-check)
-                if (!name || !relation || !location || !homeType || !power || !timeline || !heavy || !packageInterest || !phone) {
-                    alert('Please fill in all required fields before sending.');
+                const name = nameEl.value.trim();
+                const relation = relationEl.value;
+                const location = locationEl.value.trim();
+                const homeType = homeTypeEl.value;
+                const power = powerEl.value;
+                const timeline = timelineEl.value;
+                const heavy = heavyEl.value;
+                const packageInterest = packageEl.value;
+                const budget = budgetEl.value;
+                const phone = phoneEl.value.trim();
+                const needs = needsEl.value.trim();
+
+                // Reset all errors first
+                [nameEl, relationEl, locationEl, homeTypeEl, powerEl, timelineEl, heavyEl, packageEl, budgetEl, phoneEl]
+                    .forEach(function(el) { setFieldError(el, ''); });
+
+                // Validate
+                let firstInvalid = null;
+                if (!name) { setFieldError(nameEl, 'Please enter your name.'); firstInvalid = firstInvalid || nameEl; }
+                if (!relation) { setFieldError(relationEl, 'Please select who the system is for.'); firstInvalid = firstInvalid || relationEl; }
+                if (!location) { setFieldError(locationEl, 'Please enter the home location.'); firstInvalid = firstInvalid || locationEl; }
+                if (!homeType) { setFieldError(homeTypeEl, 'Please select the home type.'); firstInvalid = firstInvalid || homeTypeEl; }
+                if (!power) { setFieldError(powerEl, 'Please select the current power situation.'); firstInvalid = firstInvalid || powerEl; }
+                if (!timeline) { setFieldError(timelineEl, 'Please select how soon it is needed.'); firstInvalid = firstInvalid || timelineEl; }
+                if (!heavy) { setFieldError(heavyEl, 'Please select one of these options.'); firstInvalid = firstInvalid || heavyEl; }
+                if (!packageInterest) { setFieldError(packageEl, 'Please select a package interest.'); firstInvalid = firstInvalid || packageEl; }
+                if (!budget) { setFieldError(budgetEl, 'Please select your budget readiness.'); firstInvalid = firstInvalid || budgetEl; }
+                if (!phone) { setFieldError(phoneEl, 'Please enter your phone / WhatsApp number.'); firstInvalid = firstInvalid || phoneEl; }
+
+                if (firstInvalid) {
+                    firstInvalid.focus();
+                    firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'center' });
                     return;
                 }
 
@@ -1517,6 +1613,7 @@
                     `How soon it is needed: ${timeline}\n` +
                     `Heavy appliances in use: ${heavy}\n` +
                     `Package interest: ${packageInterest}\n` +
+                    `Budget readiness: ${budget}\n` +
                     `Phone: ${phone}\n` +
                     `Needs: ${needs || 'Not specified'}\n\n` +
                     `Please contact me regarding the senior solar system.`;
