@@ -1004,6 +1004,46 @@
             box-shadow: 0 0 0 4px rgba(192, 57, 43, .08);
         }
 
+        /* consent checkbox */
+        .consent-row {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 12px 14px;
+            border: 1px solid #deded8;
+            background: #f8f8f4;
+            border-radius: 11px;
+            transition: border-color .18s ease, box-shadow .18s ease, background .18s ease;
+        }
+        .consent-row input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            margin: 2px 0 0;
+            flex: 0 0 18px;
+            accent-color: #d6ae00;
+            cursor: pointer;
+        }
+        .cta-form .consent-row label {
+            flex: 1;
+            font-size: 13px;
+            font-weight: 500;
+            color: #333;
+            letter-spacing: 0;
+            line-height: 1.5;
+            cursor: pointer;
+            text-transform: none;
+        }
+        .consent-row .field-error {
+            flex-basis: 100%;
+            margin-top: 0;
+        }
+        .consent-row.invalid {
+            border-color: #c0392b;
+            background: #fdf2f1;
+            box-shadow: 0 0 0 4px rgba(192, 57, 43, .08);
+        }
+
         footer {
             border-top: 1px solid var(--line);
             padding: 30px 0 46px;
@@ -1483,8 +1523,20 @@
                             </div>
                         </div>
 
-                        <!-- Row 4: Timeline + Heavy loads -->
+                        <!-- Row 4: Package interest + How soon -->
                         <div class="form-row">
+                            <div>
+                                <label for="package">PACKAGE INTEREST</label>
+                                <select id="package" name="package" required>
+                                    <option value="">Select one</option>
+                                    <option>Comfort 3 (₦2,685,000)</option>
+                                    <option>Comfort 2 (₦2,995,000) — Most comfortable fit</option>
+                                    <option>Comfort 1 (₦3,990,000)</option>
+                                    <option>Not sure yet — need guidance</option>
+                                    <option>Larger / custom system (AC, heavier loads)</option>
+                                </select>
+                                <div class="field-error" data-error-for="package"></div>
+                            </div>
                             <div>
                                 <label for="timeline">HOW SOON IS IT NEEDED?</label>
                                 <select id="timeline" name="timeline" required>
@@ -1495,6 +1547,21 @@
                                     <option>Just exploring options for now</option>
                                 </select>
                                 <div class="field-error" data-error-for="timeline"></div>
+                            </div>
+                        </div>
+
+                        <!-- Row 5: Budget readiness + Heavy loads -->
+                        <div class="form-row">
+                            <div>
+                                <label for="budget">BUDGET READINESS *</label>
+                                <select id="budget" name="budget" required>
+                                    <option value="">Select one</option>
+                                    <option>Ready to proceed now</option>
+                                    <option>Ready after site assessment</option>
+                                    <option>Need a payment plan</option>
+                                    <option>Still comparing options</option>
+                                </select>
+                                <div class="field-error" data-error-for="budget"></div>
                             </div>
                             <div>
                                 <label for="heavy">DOES THE HOME USE ANY OF THESE?</label>
@@ -1510,38 +1577,20 @@
                             </div>
                         </div>
 
-                        <!-- Row 5: Package + Budget -->
-                        <div class="form-row">
+                        <!-- Full-width: needs (OPTIONAL) -->
+                        <div class="form-row full">
                             <div>
-                                <label for="package">PACKAGE INTEREST</label>
-                                <select id="package" name="package" required>
-                                    <option value="">Select one</option>
-                                    <option>Comfort 3 (₦2,685,000)</option>
-                                    <option>Comfort 2 (₦2,995,000) — Most comfortable fit</option>
-                                    <option>Comfort 1 (₦3,990,000)</option>
-                                    <option>Not sure yet — need guidance</option>
-                                    <option>Larger / custom system (AC, heavier loads)</option>
-                                </select>
-                                <div class="field-error" data-error-for="package"></div>
-                            </div>
-                            <div>
-                                <label for="budget">BUDGET READINESS *</label>
-                                <select id="budget" name="budget" required>
-                                    <option value="">Select one</option>
-                                    <option>Ready to proceed now</option>
-                                    <option>Ready after site assessment</option>
-                                    <option>Need a payment plan</option>
-                                    <option>Still comparing options</option>
-                                </select>
-                                <div class="field-error" data-error-for="budget"></div>
+                                <label for="needs">WHAT NEEDS TO STAY POWERED? (OPTIONAL)</label>
+                                <textarea id="needs" name="needs" placeholder="Fridge, lights, TV, water pump, fans, Wi‑Fi, CCTV..."></textarea>
                             </div>
                         </div>
 
-                        <!-- Full-width: needs -->
+                        <!-- Full-width: consent -->
                         <div class="form-row full">
-                            <div>
-                                <label for="needs">WHAT NEEDS TO STAY POWERED?</label>
-                                <textarea id="needs" name="needs" placeholder="Fridge, lights, TV, water pump, fans, Wi‑Fi, CCTV..."></textarea>
+                            <div class="consent-row" id="consentRow">
+                                <input type="checkbox" id="consent" name="consent" required />
+                                <label for="consent">I confirm the details above are correct and agree to be contacted on WhatsApp or by phone about this assessment.</label>
+                                <div class="field-error" data-error-for="consent"></div>
                             </div>
                         </div>
 
@@ -1573,14 +1622,18 @@
             function setFieldError(fieldEl, message) {
                 const wrapper = fieldEl.closest('div');
                 const errorEl = wrapper ? wrapper.querySelector('.field-error') : null;
+                const consentRow = fieldEl.closest('.consent-row');
+
                 if (message) {
                     fieldEl.classList.add('invalid');
+                    if (consentRow) consentRow.classList.add('invalid');
                     if (errorEl) {
                         errorEl.textContent = message;
                         errorEl.classList.add('show');
                     }
                 } else {
                     fieldEl.classList.remove('invalid');
+                    if (consentRow) consentRow.classList.remove('invalid');
                     if (errorEl) {
                         errorEl.textContent = '';
                         errorEl.classList.remove('show');
@@ -1591,13 +1644,15 @@
             // Clear errors as user corrects the field
             form.addEventListener('change', function(e) {
                 if (e.target.matches('select, input, textarea')) {
-                    if (e.target.value.trim()) {
+                    if (e.target.type === 'checkbox') {
+                        if (e.target.checked) setFieldError(e.target, '');
+                    } else if (e.target.value.trim()) {
                         setFieldError(e.target, '');
                     }
                 }
             });
             form.addEventListener('input', function(e) {
-                if (e.target.matches('input, textarea')) {
+                if (e.target.matches('input, textarea') && e.target.type !== 'checkbox') {
                     if (e.target.value.trim()) {
                         setFieldError(e.target, '');
                     }
@@ -1619,6 +1674,7 @@
                 const budgetEl = document.getElementById('budget');
                 const phoneEl = document.getElementById('phone');
                 const needsEl = document.getElementById('needs');
+                const consentEl = document.getElementById('consent');
 
                 const name = nameEl.value.trim();
                 const relation = relationEl.value;
@@ -1631,12 +1687,13 @@
                 const budget = budgetEl.value;
                 const phone = phoneEl.value.trim();
                 const needs = needsEl.value.trim();
+                const consent = consentEl.checked;
 
                 // Reset all errors first
-                [nameEl, relationEl, locationEl, homeTypeEl, powerEl, timelineEl, heavyEl, packageEl, budgetEl, phoneEl]
+                [nameEl, relationEl, locationEl, homeTypeEl, powerEl, timelineEl, heavyEl, packageEl, budgetEl, phoneEl, consentEl]
                     .forEach(function(el) { setFieldError(el, ''); });
 
-                // Validate
+                // Validate (needs is intentionally optional)
                 let firstInvalid = null;
                 if (!name) { setFieldError(nameEl, 'Please enter your name.'); firstInvalid = firstInvalid || nameEl; }
                 if (!relation) { setFieldError(relationEl, 'Please select who the system is for.'); firstInvalid = firstInvalid || relationEl; }
@@ -1648,6 +1705,7 @@
                 if (!packageInterest) { setFieldError(packageEl, 'Please select a package interest.'); firstInvalid = firstInvalid || packageEl; }
                 if (!budget) { setFieldError(budgetEl, 'Please select your budget readiness.'); firstInvalid = firstInvalid || budgetEl; }
                 if (!phone) { setFieldError(phoneEl, 'Please enter your phone / WhatsApp number.'); firstInvalid = firstInvalid || phoneEl; }
+                if (!consent) { setFieldError(consentEl, 'Please confirm your consent to be contacted.'); firstInvalid = firstInvalid || consentEl; }
 
                 if (firstInvalid) {
                     firstInvalid.focus();
@@ -1668,7 +1726,8 @@
                     `Package interest: ${packageInterest}\n` +
                     `Budget readiness: ${budget}\n` +
                     `Phone: ${phone}\n` +
-                    `Needs: ${needs || 'Not specified'}\n\n` +
+                    `Needs: ${needs || 'Not specified'}\n` +
+                    `Consent to contact: Yes\n\n` +
                     `Please contact me regarding the senior solar system.`;
 
                 // Build WhatsApp URL
