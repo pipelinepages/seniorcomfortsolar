@@ -973,6 +973,17 @@
             text-align: center
         }
 
+        /* two-column form rows */
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            align-items: start;
+        }
+        .form-row.full {
+            grid-template-columns: 1fr;
+        }
+
         /* inline field error */
         .field-error {
             display: none;
@@ -1135,6 +1146,10 @@
             }
             .microproof {
                 gap: 10px 16px
+            }
+            /* collapse form rows on small screens */
+            .form-row {
+                grid-template-columns: 1fr
             }
         }
     </style>
@@ -1403,101 +1418,139 @@
                         <p>Tell us what your parent uses at home. The next step is to match the right inverter, battery and solar capacity to their real daily needs.</p>
                     </div>
                     <form class="cta-form" id="assessmentForm" novalidate>
-                        <div>
-                            <label for="name">YOUR NAME</label>
-                            <input id="name" name="name" placeholder="e.g. Chinedu Okafor" autocomplete="name" required />
+
+                        <!-- Row 1: Contact -->
+                        <div class="form-row">
+                            <div>
+                                <label for="name">YOUR NAME</label>
+                                <input id="name" name="name" placeholder="e.g. Chinedu Okafor" autocomplete="name" required />
+                                <div class="field-error" data-error-for="name"></div>
+                            </div>
+                            <div>
+                                <label for="phone">PHONE / WHATSAPP</label>
+                                <input id="phone" name="phone" type="tel" placeholder="080..." autocomplete="tel" required />
+                                <div class="field-error" data-error-for="phone"></div>
+                            </div>
                         </div>
-                        <div>
-                            <label for="relation">WHO IS THE SYSTEM FOR?</label>
-                            <select id="relation" name="relation" required>
-                                <option value="">Select one</option>
-                                <option>My mother</option>
-                                <option>My father</option>
-                                <option>Both parents</option>
-                                <option>Grandparent / elderly relative</option>
-                                <option>Myself</option>
-                            </select>
+
+                        <!-- Row 2: Who + Where -->
+                        <div class="form-row">
+                            <div>
+                                <label for="relation">WHO IS THE SYSTEM FOR?</label>
+                                <select id="relation" name="relation" required>
+                                    <option value="">Select one</option>
+                                    <option>My mother</option>
+                                    <option>My father</option>
+                                    <option>Both parents</option>
+                                    <option>Grandparent / elderly relative</option>
+                                    <option>Myself</option>
+                                </select>
+                                <div class="field-error" data-error-for="relation"></div>
+                            </div>
+                            <div>
+                                <label for="location">WHERE IS THE HOME?</label>
+                                <input id="location" name="location" placeholder="e.g. Ikeja, Lagos" autocomplete="address-level2" required />
+                                <div class="field-error" data-error-for="location"></div>
+                            </div>
                         </div>
-                        <div>
-                            <label for="location">WHERE IS THE HOME?</label>
-                            <input id="location" name="location" placeholder="e.g. Ikeja, Lagos" autocomplete="address-level2" required />
+
+                        <!-- Row 3: Home type + Power situation -->
+                        <div class="form-row">
+                            <div>
+                                <label for="homeType">WHAT TYPE OF HOME IS IT?</label>
+                                <select id="homeType" name="homeType" required>
+                                    <option value="">Select one</option>
+                                    <option>Bungalow</option>
+                                    <option>Duplex</option>
+                                    <option>Flat / Apartment</option>
+                                    <option>Storey building</option>
+                                    <option>Self-contained / Studio</option>
+                                    <option>Other / not sure</option>
+                                </select>
+                                <div class="field-error" data-error-for="homeType"></div>
+                            </div>
+                            <div>
+                                <label for="power">CURRENT POWER SITUATION</label>
+                                <select id="power" name="power" required>
+                                    <option value="">Select one</option>
+                                    <option>Frequent outages (daily or almost daily)</option>
+                                    <option>Regular outages (several times a week)</option>
+                                    <option>Occasional outages</option>
+                                    <option>Mostly rely on generator</option>
+                                    <option>Grid is mostly stable</option>
+                                </select>
+                                <div class="field-error" data-error-for="power"></div>
+                            </div>
                         </div>
-                        <div>
-                            <label for="homeType">WHAT TYPE OF HOME IS IT?</label>
-                            <select id="homeType" name="homeType" required>
-                                <option value="">Select one</option>
-                                <option>Bungalow</option>
-                                <option>Duplex</option>
-                                <option>Flat / Apartment</option>
-                                <option>Storey building</option>
-                                <option>Self-contained / Studio</option>
-                                <option>Other / not sure</option>
-                            </select>
+
+                        <!-- Row 4: Timeline + Heavy loads -->
+                        <div class="form-row">
+                            <div>
+                                <label for="timeline">HOW SOON IS IT NEEDED?</label>
+                                <select id="timeline" name="timeline" required>
+                                    <option value="">Select one</option>
+                                    <option>As soon as possible</option>
+                                    <option>Within the next 2–4 weeks</option>
+                                    <option>Within 1–3 months</option>
+                                    <option>Just exploring options for now</option>
+                                </select>
+                                <div class="field-error" data-error-for="timeline"></div>
+                            </div>
+                            <div>
+                                <label for="heavy">DOES THE HOME USE ANY OF THESE?</label>
+                                <select id="heavy" name="heavy" required>
+                                    <option value="">Select one</option>
+                                    <option>Air conditioner(s)</option>
+                                    <option>Electric cooker / oven</option>
+                                    <option>Electric water heater</option>
+                                    <option>None of these</option>
+                                    <option>More than one of these</option>
+                                </select>
+                                <div class="field-error" data-error-for="heavy"></div>
+                            </div>
                         </div>
-                        <div>
-                            <label for="power">CURRENT POWER SITUATION</label>
-                            <select id="power" name="power" required>
-                                <option value="">Select one</option>
-                                <option>Frequent outages (daily or almost daily)</option>
-                                <option>Regular outages (several times a week)</option>
-                                <option>Occasional outages</option>
-                                <option>Mostly rely on generator</option>
-                                <option>Grid is mostly stable</option>
-                            </select>
+
+                        <!-- Row 5: Package + Budget -->
+                        <div class="form-row">
+                            <div>
+                                <label for="package">PACKAGE INTEREST</label>
+                                <select id="package" name="package" required>
+                                    <option value="">Select one</option>
+                                    <option>Comfort 3 (₦2,685,000)</option>
+                                    <option>Comfort 2 (₦2,995,000) — Most comfortable fit</option>
+                                    <option>Comfort 1 (₦3,990,000)</option>
+                                    <option>Not sure yet — need guidance</option>
+                                    <option>Larger / custom system (AC, heavier loads)</option>
+                                </select>
+                                <div class="field-error" data-error-for="package"></div>
+                            </div>
+                            <div>
+                                <label for="budget">BUDGET READINESS *</label>
+                                <select id="budget" name="budget" required>
+                                    <option value="">Select one</option>
+                                    <option>Ready to proceed now</option>
+                                    <option>Ready after site assessment</option>
+                                    <option>Need a payment plan</option>
+                                    <option>Still comparing options</option>
+                                </select>
+                                <div class="field-error" data-error-for="budget"></div>
+                            </div>
                         </div>
-                        <div>
-                            <label for="timeline">HOW SOON IS IT NEEDED?</label>
-                            <select id="timeline" name="timeline" required>
-                                <option value="">Select one</option>
-                                <option>As soon as possible</option>
-                                <option>Within the next 2–4 weeks</option>
-                                <option>Within 1–3 months</option>
-                                <option>Just exploring options for now</option>
-                            </select>
+
+                        <!-- Full-width: needs -->
+                        <div class="form-row full">
+                            <div>
+                                <label for="needs">WHAT NEEDS TO STAY POWERED?</label>
+                                <textarea id="needs" name="needs" placeholder="Fridge, lights, TV, water pump, fans, Wi‑Fi, CCTV..."></textarea>
+                            </div>
                         </div>
-                        <div>
-                            <label for="heavy">DOES THE HOME USE ANY OF THESE?</label>
-                            <select id="heavy" name="heavy" required>
-                                <option value="">Select one</option>
-                                <option>Air conditioner(s)</option>
-                                <option>Electric cooker / oven</option>
-                                <option>Electric water heater</option>
-                                <option>None of these</option>
-                                <option>More than one of these</option>
-                            </select>
+
+                        <!-- Full-width: submit + status note -->
+                        <div class="form-row full">
+                            <button class="btn btn-primary" type="submit">Send via WhatsApp →</button>
+                            <div class="form-note">Your assessment request will be sent directly to our team on WhatsApp.</div>
                         </div>
-                        <div>
-                            <label for="package">PACKAGE INTEREST</label>
-                            <select id="package" name="package" required>
-                                <option value="">Select one</option>
-                                <option>Comfort 3 (₦2,685,000)</option>
-                                <option>Comfort 2 (₦2,995,000) — Most comfortable fit</option>
-                                <option>Comfort 1 (₦3,990,000)</option>
-                                <option>Not sure yet — need guidance</option>
-                                <option>Larger / custom system (AC, heavier loads)</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label for="budget">BUDGET READINESS *</label>
-                            <select id="budget" name="budget" required>
-                                <option value="">Select one</option>
-                                <option>Ready to proceed now</option>
-                                <option>Ready after site assessment</option>
-                                <option>Need a payment plan</option>
-                                <option>Still comparing options</option>
-                            </select>
-                            <div class="field-error" data-error-for="budget"></div>
-                        </div>
-                        <div>
-                            <label for="phone">PHONE / WHATSAPP</label>
-                            <input id="phone" name="phone" type="tel" placeholder="080..." autocomplete="tel" required />
-                        </div>
-                        <div>
-                            <label for="needs">WHAT NEEDS TO STAY POWERED?</label>
-                            <textarea id="needs" name="needs" placeholder="Fridge, lights, TV, water pump, fans, Wi‑Fi, CCTV..."></textarea>
-                        </div>
-                        <button class="btn btn-primary" type="submit">Send via WhatsApp →</button>
-                        <div class="form-note">Your assessment request will be sent directly to our team on WhatsApp.</div>
+
                     </form>
                 </div>
             </div>
