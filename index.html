@@ -1436,6 +1436,17 @@
                             </select>
                         </div>
                         <div>
+                            <label for="heavy">DOES THE HOME USE ANY OF THESE?</label>
+                            <select id="heavy" name="heavy" required>
+                                <option value="">Select one</option>
+                                <option>Air conditioner(s)</option>
+                                <option>Electric cooker / oven</option>
+                                <option>Electric water heater</option>
+                                <option>None of these</option>
+                                <option>More than one of these</option>
+                            </select>
+                        </div>
+                        <div>
                             <label for="phone">PHONE / WHATSAPP</label>
                             <input id="phone" name="phone" type="tel" placeholder="080..." autocomplete="tel" required />
                         </div>
@@ -1473,11 +1484,12 @@
                 const homeType = document.getElementById('homeType').value;
                 const power = document.getElementById('power').value;
                 const timeline = document.getElementById('timeline').value;
+                const heavy = document.getElementById('heavy').value;
                 const phone = document.getElementById('phone').value.trim();
                 const needs = document.getElementById('needs').value.trim();
 
                 // Basic validation (browser handles required, but double-check)
-                if (!name || !relation || !location || !homeType || !power || !timeline || !phone) {
+                if (!name || !relation || !location || !homeType || !power || !timeline || !heavy || !phone) {
                     alert('Please fill in all required fields before sending.');
                     return;
                 }
@@ -1491,6 +1503,7 @@
                     `Home type: ${homeType}\n` +
                     `Current power situation: ${power}\n` +
                     `How soon it is needed: ${timeline}\n` +
+                    `Heavy appliances in use: ${heavy}\n` +
                     `Phone: ${phone}\n` +
                     `Needs: ${needs || 'Not specified'}\n\n` +
                     `Please contact me regarding the senior solar system.`;
